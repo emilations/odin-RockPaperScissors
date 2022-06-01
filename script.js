@@ -1,11 +1,10 @@
 for (let i =  0; i < 5; i++) {
     let playerSelection;
-    while(!playerSelection) {
-        playerSelection = prompt("Enter your selection: ");
-    }
-    console.log(playerSelection)
+    playerSelection = prompt("Enter your hand (Rock, Paper, Scissors): ");
     playerSelection = currateSelection(playerSelection);
-    break;
+    if (!(checkInput(playerSelection))) {
+        alert("The selection is not correct")
+    } ;
 }
 
 // This randomizes the hand of the computer
@@ -56,8 +55,15 @@ function playRound(playerSelection, computerSelection) {
 
 // Lower case the user input
 function currateSelection(playerSelection) {
-    selectionLowerCase = playerSelection.toLowerCase().split("");
-    selectionLowerCase[0] = selectionLowerCase[0].toUpperCase();
-    selectionLowerCase = selectionLowerCase.join("");
-    console.log(selectionLowerCase);
+    selectionLowerCase = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
+    return selectionLowerCase;
+}
+
+// Checks if input is valid
+function checkInput(playerSelection) {
+    console.log(playerSelection)
+    if (playerSelection == "Rock" || playerSelection == "Paper" || playerSelection == "Scissors") {
+        return true;
+    }
+    return false;
 }
