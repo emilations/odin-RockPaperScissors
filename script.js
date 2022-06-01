@@ -1,11 +1,17 @@
-for (let i =  0; i < 5; i++) {
-    let playerSelection;
-    playerSelection = prompt("Enter your hand (Rock, Paper, Scissors): ");
-    playerSelection = currateSelection(playerSelection);
-    if (!(checkInput(playerSelection))) {
-        alert("The selection is not correct")
-    } ;
+game()
+
+function game() {
+    for (let i =  0; i < 5; i++) {
+        let playerSelection;
+        playerSelection = prompt("Enter your hand (Rock, Paper, Scissors): ");
+        playerSelection = currateSelection(playerSelection);
+        if (!(checkInput(playerSelection))) {
+            alert("The selection is not correct")
+        }
+        playRound(playerSelection, computerPlay());
+    }    
 }
+
 
 // This randomizes the hand of the computer
 function computerPlay () {
