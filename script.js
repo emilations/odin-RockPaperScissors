@@ -4,11 +4,15 @@ function game() {
     for (let i =  0; i < 5; i++) {
         let playerSelection;
         playerSelection = prompt("Enter your hand (Rock, Paper, Scissors): ");
+        // If user cancels the prompt
+        if (playerSelection == null) {
+            break;
+        }
         playerSelection = currateSelection(playerSelection);
         if (!(checkInput(playerSelection))) {
             alert("The selection is not correct")
         }
-        playRound(playerSelection, computerPlay());
+        console.log(playRound(playerSelection, computerPlay()));
     }    
 }
 
