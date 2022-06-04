@@ -1,20 +1,14 @@
-// Removed as per instructions from exercice
-// game()
-// function game() {
-//     for (let i =  0; i < 5; i++) {
-//         let playerSelection;
-//         playerSelection = prompt("Enter your hand (Rock, Paper, Scissors): ");
-//         // If user cancels the prompt
-//         if (playerSelection == null) {
-//             break;
-//         }
-//         playerSelection = currateSelection(playerSelection);
-//         if (!(checkInput(playerSelection))) {
-//             alert("The selection is not correct")
-//         }
-//         console.log(playRound(playerSelection, computerPlay()));
-//     }    
-// }
+// Event listeners on buttons
+let message = document.querySelector(".message")
+
+let buttons = document.querySelectorAll("button");
+buttons.forEach(button => button.addEventListener("click", function(e) {
+    message.textContent = playRound(e.target.id, computerPlay())
+}));
+function game() {
+    // listen to input from user
+ 
+}
 
 
 // This randomizes the hand of the computer
@@ -77,10 +71,3 @@ function checkInput(playerSelection) {
     return false;
 }
 
-// listen to input from user
-    let buttonRock = document.querySelector("#Rock");
-    let buttonPaper = document.querySelector("#Paper");
-    let buttonScissor = document.querySelector("#Scissor");
-    buttonRock.addEventListener("click", (e) => console.log(playRound(e.target.id, computerPlay())));
-    buttonPaper.addEventListener("click", (e) => console.log(playRound(e.target.id, computerPlay())));
-    buttonScissor.addEventListener("click", (e) => console.log(playRound(e.target.id, computerPlay())));
