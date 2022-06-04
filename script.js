@@ -1,27 +1,41 @@
-let score = {player: 0, computer: 0};
+let score;
+let scoreMessage;
+let message;
 game()
+
+
 
 // initiates button event listener
 function game() {
-    let buttons = document.querySelectorAll("button");
+    score = {player: 0, computer: 0};
+    let buttons = document.querySelectorAll(".container button");
+    let resetButton = document.querySelector(".reset");
     buttons.forEach(button => button.addEventListener("click", buttonClickRound))
+    resetButton.addEventListener("click", resetGame)
 }
 
 // Event listeners on buttons
 function buttonClickRound(e){
-    let message = document.querySelector(".message p")
-    let scoreMessage = document.querySelector(".score-message p");
+    message = document.querySelector(".message p")
+    scoreMessage = document.querySelector(".score-message p");
     if (score.computer < 5 && score.player < 5) {
         let roundVerdict = playRound(e.target.id, computerPlay());
         message.textContent = roundVerdict.messageWin;
         if (roundVerdict.winner == "player") {score.player++;}
         else if (roundVerdict.winner == "computer") {score.computer++;}
-        scoreMessage.innerHTML = `Your score is: ${score.player} <br/> The computer score is: ${score.computer}`;
+        scoreMessage.innerHTML = `Game till score of 5 <br> Your score is: ${score.player} <br/> The computer score is: ${score.computer}`;
     } else {
         let winner = getKeyByValue(score, 5)
         scoreMessage.innerHTML = `The winner is ${winner}`;
     }
 }
+
+function resetGame() {
+    message.textContent = "";
+    scoreMessage.innerHTML = "";
+    game();
+}
+
 
 // Will identify winner score of 5   
 function getKeyByValue(object, value) {
