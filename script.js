@@ -1,15 +1,59 @@
-// Event listeners on buttons
-let message = document.querySelector(".message")
+let score = {player: 0, computer: 0};
+game()
 
-let buttons = document.querySelectorAll("button");
-buttons.forEach(button => button.addEventListener("click", function(e) {
-    message.textContent = playRound(e.target.id, computerPlay())
-}));
+// initiates button event listener
 function game() {
-    // listen to input from user
- 
+    let buttons = document.querySelectorAll("button");
+    buttons.forEach(button => button.addEventListener("click", buttonClickRound))
 }
 
+// Event listeners on buttons
+function buttonClickRound(e){
+    let message = document.querySelector(".message p")
+    let scoreMessage = document.querySelector(".score-message p");
+    if (score.computer < 5 && score.player < 5) {
+        let roundVerdict = playRound(e.target.id, computerPlay());
+        message.textContent = roundVerdict.messageWin;
+        if (roundVerdict.winner == "player") {score.player++;}
+        else if (roundVerdict.winner == "computer") {score.computer++;}
+        scoreMessage.innerHTML = `Your score is: ${score.player} <br/> The computer score is: ${score.computer}`;
+    } else {
+        let winner = getKeyByValue(score, 5)
+        scoreMessage.innerHTML = `The winner is ${winner}`;
+    }
+}
+
+// Will identify winner score of 5   
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+    }
+
+// This simulates one round of User vs Computer
+function playRound(playerSelection, computerSelection) {
+    let result;
+    if (playerSelection == computerSelection) {
+        return {messageWin: "It is a tie", winner: "none"};
+    }
+    if ((playerSelection+computerSelection) == "RockPaper" || (playerSelection+computerSelection) == "PaperRock") {
+        if (playerSelection == "Paper") {
+            return {messageWin: "You win, Paper beats Rock", winner: "player"};
+        } else {
+            return {messageWin: "You lose, Paper beats Rock", winner: "computer"};
+        }
+    } else if ((playerSelection+computerSelection) == "RockScissors" || (playerSelection+computerSelection) == "ScissorsRock") {
+        if (playerSelection == "Rock") {
+            return {messageWin: "You win, Rock beats Scissors", winner: "player"};
+        } else {
+            return {messageWin: "You lose, Rock beats Scissors", winner: "computer"};
+        }
+    } else {
+        if (playerSelection == "Scissors") {
+            return {messageWin: "You win, Scissors beats Paper", winner: "player"};
+        } else {
+            return {messageWin: "You lose, Scissors beats Paper", winner: "computer"};
+        }
+    }
+}
 
 // This randomizes the hand of the computer
 function computerPlay() {
@@ -28,46 +72,3 @@ function computerPlay() {
     }
     return computerSelection;
 }
-
-// This simulates one round of User vs Computer
-function playRound(playerSelection, computerSelection) {
-    let result;
-    if (playerSelection == computerSelection) {
-        return "It is a tie";
-    }
-    if ((playerSelection+computerSelection) == "RockPaper" || (playerSelection+computerSelection) == "PaperRock") {
-        if (playerSelection == "Paper") {
-            return "You win, Paper beats Rock";
-        } else {
-            return "You lose, Paper beats Rock"
-        }
-    } else if ((playerSelection+computerSelection) == "RockScissors" || (playerSelection+computerSelection) == "ScissorsRock") {
-        if (playerSelection == "Rock") {
-            return "You win, Rock beats Scissors";
-        } else {
-            return "You lose, Rock beats Scissors"
-        }
-    } else {
-        if (playerSelection == "Scissors") {
-            return "You win, Scissors beats Paper";
-        } else {
-            return "You lose, Scissors beats Paper";
-        }
-    }
-}
-
-// Lower case the user input
-function currateSelection(playerSelection) {
-    selectionLowerCase = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
-    return selectionLowerCase;
-}
-
-// Checks if input is valid
-function checkInput(playerSelection) {
-    console.log(playerSelection)
-    if (playerSelection == "Rock" || playerSelection == "Paper" || playerSelection == "Scissors") {
-        return true;
-    }
-    return false;
-}
-
