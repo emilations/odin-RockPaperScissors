@@ -54,17 +54,17 @@ function playRound(playerSelection, computerSelection) {
         } else {
             return {messageWin: "You lose, Paper beats Rock", winner: "computer"};
         }
-    } else if ((playerSelection+computerSelection) == "RockScissors" || (playerSelection+computerSelection) == "ScissorsRock") {
+    } else if ((playerSelection+computerSelection) == "Rockscissor" || (playerSelection+computerSelection) == "ScissorRock") {
         if (playerSelection == "Rock") {
-            return {messageWin: "You win, Rock beats Scissors", winner: "player"};
+            return {messageWin: "You win, Rock beats Scissor", winner: "player"};
         } else {
-            return {messageWin: "You lose, Rock beats Scissors", winner: "computer"};
+            return {messageWin: "You lose, Rock beats Scissor", winner: "computer"};
         }
     } else {
-        if (playerSelection == "Scissors") {
-            return {messageWin: "You win, Scissors beats Paper", winner: "player"};
+        if (playerSelection == "Scissor") {
+            return {messageWin: "You win, Scissor beats Paper", winner: "player"};
         } else {
-            return {messageWin: "You lose, Scissors beats Paper", winner: "computer"};
+            return {messageWin: "You lose, Scissor beats Paper", winner: "computer"};
         }
     }
 }
@@ -81,7 +81,7 @@ function computerPlay() {
             computerSelection = "Paper";
             break;
         case 3:
-            computerSelection = "Scissors";
+            computerSelection = "Scissor";
             break;
     }
     return computerSelection;
