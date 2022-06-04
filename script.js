@@ -1,24 +1,24 @@
-game()
-
-function game() {
-    for (let i =  0; i < 5; i++) {
-        let playerSelection;
-        playerSelection = prompt("Enter your hand (Rock, Paper, Scissors): ");
-        // If user cancels the prompt
-        if (playerSelection == null) {
-            break;
-        }
-        playerSelection = currateSelection(playerSelection);
-        if (!(checkInput(playerSelection))) {
-            alert("The selection is not correct")
-        }
-        console.log(playRound(playerSelection, computerPlay()));
-    }    
-}
+// Removed as per instructions from exercice
+// game()
+// function game() {
+//     for (let i =  0; i < 5; i++) {
+//         let playerSelection;
+//         playerSelection = prompt("Enter your hand (Rock, Paper, Scissors): ");
+//         // If user cancels the prompt
+//         if (playerSelection == null) {
+//             break;
+//         }
+//         playerSelection = currateSelection(playerSelection);
+//         if (!(checkInput(playerSelection))) {
+//             alert("The selection is not correct")
+//         }
+//         console.log(playRound(playerSelection, computerPlay()));
+//     }    
+// }
 
 
 // This randomizes the hand of the computer
-function computerPlay () {
+function computerPlay() {
     let computerSelection;
     let random = Math.ceil(Math.random()*3);
     switch (random) {
@@ -60,7 +60,6 @@ function playRound(playerSelection, computerSelection) {
             return "You lose, Scissors beats Paper";
         }
     }
-    
 }
 
 // Lower case the user input
@@ -77,3 +76,11 @@ function checkInput(playerSelection) {
     }
     return false;
 }
+
+// listen to input from user
+    let buttonRock = document.querySelector("#Rock");
+    let buttonPaper = document.querySelector("#Paper");
+    let buttonScissor = document.querySelector("#Scissor");
+    buttonRock.addEventListener("click", (e) => console.log(playRound(e.target.id, computerPlay())));
+    buttonPaper.addEventListener("click", (e) => console.log(playRound(e.target.id, computerPlay())));
+    buttonScissor.addEventListener("click", (e) => console.log(playRound(e.target.id, computerPlay())));
