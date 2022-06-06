@@ -21,15 +21,10 @@ function buttonClickRound(e){
         message.textContent = roundVerdict.messageWin;
         scoreMessage.innerHTML = `Game till score of 5 <br> Your score is: ${score.player} <br/> The computer score is: ${score.computer}`;
     } else {
-        let winner = getKeyByValue(score, 5)
+        let winner = Object.keys(score).find(key => score[key] === 5)
         scoreMessage.innerHTML = `The winner is ${winner}`;
         buttons.forEach(button => button.removeEventListener("click", buttonClickRound));
     }
-}
-
-// Will identify winner score of 5   
-function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
 }
 
 function resetGame() {
