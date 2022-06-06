@@ -1,33 +1,35 @@
 let score;
-let scoreMessage;
-let message;
+let scoreMessage = document.querySelector(".score-message p");
+let message = document.querySelector(".message p")
+let buttons = document.querySelectorAll(".container button");
+let resetButton = document.querySelector(".reset");
+
 game()
 
-
-
-// initiates button event listener
 function game() {
     score = {player: 0, computer: 0};
-    let buttons = document.querySelectorAll(".container button");
-    let resetButton = document.querySelector(".reset");
     buttons.forEach(button => button.addEventListener("click", buttonClickRound))
     resetButton.addEventListener("click", resetGame)
 }
 
 // Event listeners on buttons
 function buttonClickRound(e){
-    message = document.querySelector(".message p")
-    scoreMessage = document.querySelector(".score-message p");
+    let roundVerdict = playRound(e.target.id, computerPlay());
+    if (roundVerdict.winner == "player") {score.player++;}
+    else if (roundVerdict.winner == "computer") {score.computer++;}
     if (score.computer < 5 && score.player < 5) {
-        let roundVerdict = playRound(e.target.id, computerPlay());
         message.textContent = roundVerdict.messageWin;
-        if (roundVerdict.winner == "player") {score.player++;}
-        else if (roundVerdict.winner == "computer") {score.computer++;}
         scoreMessage.innerHTML = `Game till score of 5 <br> Your score is: ${score.player} <br/> The computer score is: ${score.computer}`;
     } else {
         let winner = getKeyByValue(score, 5)
         scoreMessage.innerHTML = `The winner is ${winner}`;
+        buttons.forEach(button => button.removeEventListener("click", buttonClickRound));
     }
+}
+
+// Will identify winner score of 5   
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
 }
 
 function resetGame() {
@@ -36,17 +38,11 @@ function resetGame() {
     game();
 }
 
-
-// Will identify winner score of 5   
-function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-    }
-
 // This simulates one round of User vs Computer
 function playRound(playerSelection, computerSelection) {
     let result;
     if (playerSelection == computerSelection) {
-        return {messageWin: "It is a tie", winner: "none"};
+        return {messageWin: "It is a tie", winner: "none"}
     }
     if ((playerSelection+computerSelection) == "RockPaper" || (playerSelection+computerSelection) == "PaperRock") {
         if (playerSelection == "Paper") {
@@ -54,7 +50,7 @@ function playRound(playerSelection, computerSelection) {
         } else {
             return {messageWin: "You lose, Paper beats Rock", winner: "computer"};
         }
-    } else if ((playerSelection+computerSelection) == "Rockscissor" || (playerSelection+computerSelection) == "ScissorRock") {
+    } else if ((playerSelection+computerSelection) == "RockScissor" || (playerSelection+computerSelection) == "ScissorRock") {
         if (playerSelection == "Rock") {
             return {messageWin: "You win, Rock beats Scissor", winner: "player"};
         } else {
