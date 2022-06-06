@@ -15,8 +15,6 @@ function game() {
 // Event listeners on buttons
 function buttonClickRound(e){
     let roundVerdict = playRound(e.target.id, computerPlay());
-    if (roundVerdict.winner == "player") {score.player++;}
-    else if (roundVerdict.winner == "computer") {score.computer++;}
     if (score.computer < 5 && score.player < 5) {
         message.textContent = roundVerdict.messageWin;
         scoreMessage.innerHTML = `Game till score of 5 <br> Your score is: ${score.player} <br/> The computer score is: ${score.computer}`;
@@ -41,20 +39,26 @@ function playRound(playerSelection, computerSelection) {
     }
     if ((playerSelection+computerSelection) == "RockPaper" || (playerSelection+computerSelection) == "PaperRock") {
         if (playerSelection == "Paper") {
+            score.player++;
             return {messageWin: "You win, Paper beats Rock", winner: "player"};
         } else {
+            score.computer++;
             return {messageWin: "You lose, Paper beats Rock", winner: "computer"};
         }
     } else if ((playerSelection+computerSelection) == "RockScissor" || (playerSelection+computerSelection) == "ScissorRock") {
         if (playerSelection == "Rock") {
+            score.player++;
             return {messageWin: "You win, Rock beats Scissor", winner: "player"};
         } else {
+            score.computer++;
             return {messageWin: "You lose, Rock beats Scissor", winner: "computer"};
         }
     } else {
         if (playerSelection == "Scissor") {
+            score.player++;
             return {messageWin: "You win, Scissor beats Paper", winner: "player"};
         } else {
+            score.computer++;
             return {messageWin: "You lose, Scissor beats Paper", winner: "computer"};
         }
     }
